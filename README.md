@@ -1,14 +1,14 @@
 **Linux File Permissions Management Portfolio Document**
 
-**Project Description:** As a security professional, I ensured secure and proper access control in the file system of an organizational environment. This document demonstrates my practical experience using Linux commands to check, interpret, and modify file and directory permissions to maintain system security.
+**Project Description:** The research team at my organization needed to update the file permissions for certain files and directories within the projects directory. The permissions did not currently reflect the level of authorization that should be given. Checking and updating these permissions helped keep their system secure. To complete this task, I performed the following steps:
 
 ---
 
 ### **Section 1: Checking File and Directory Details**
 
-**Command I Used:** `ls -la`
+**Command Used:** `ls -la`
 
-**What I Did:** I used the `ls -la` command to list all files and directories, including hidden ones, along with their associated details such as permissions, ownership, size, and modification date.
+**What I Did:** I used the `ls -la` command to determine the existing permissions set for a specific directory in the file system. This command lists all contents of the directory, including hidden files, and provides detailed information.
 
 **Example Output:**
 
@@ -18,76 +18,86 @@
 drwx------  2 user group 4096 Jan 4 16:00 drafts
 ```
 
+The output of my command indicates there is one directory named `drafts`, one hidden file named `.project_x.txt`, and five other project files. The 10-character string in the first column represents the permissions set on each file or directory.
+
 ---
 
 ### **Section 2: Explaining the Permissions String**
 
 **What I Did:** I analyzed the 10-character permissions string from the `ls -la` output to understand access control.
 
-**Explanation:**
-- The first character indicates the file type (`-` for a regular file, `d` for a directory).
-- The next nine characters are grouped into three sets for the owner, group, and others:
-  - `r`: Read permission
-  - `w`: Write permission
-  - `x`: Execute permission
-  - `-`: No permission
+#### **Explanation:**
+- **1st Character:** Indicates the file type (`-` for a regular file, `d` for a directory).
+- **2nd-4th Characters:** Represent the read (r), write (w), and execute (x) permissions for the user.
+- **5th-7th Characters:** Represent the read (r), write (w), and execute (x) permissions for the group.
+- **8th-10th Characters:** Represent the read (r), write (w), and execute (x) permissions for others.
+
+When one of these characters is a hyphen (`-`), it indicates that the permission is not granted.
 
 **Example:** For `-rw-r--r--`:
-- Owner: Read and write
-- Group: Read-only
-- Others: Read-only
+- **Owner:** Read and write
+- **Group:** Read-only
+- **Others:** Read-only
 
 ---
 
-### **Section 3: Modifying File Permissions**
+### **Section 3: Changing File Permissions**
 
-**Command I Used:** `chmod`
+**Command Used:** `chmod`
 
-**What I Did:** I used `chmod` to modify file permissions to match organizational security policies.
+**What I Did:** I modified file permissions to match organizational security policies.
 
-**Examples:**
-1. To grant write permission to the group:
-   ```bash
-   chmod g+w research_data.txt
-   ```
-2. To remove read permission for others:
-   ```bash
-   chmod o-r research_data.txt
-   ```
+#### **Example 1:**
+To remove write access for others:
+```bash
+chmod o-w project_k.txt
+```
+
+#### **Example 2:**
+To grant write access to the group:
+```bash
+chmod g+w research_data.txt
+```
+
+After making changes, I used `ls -la` to verify the updated permissions.
 
 ---
 
-### **Section 4: Adjusting Permissions for a Hidden File**
+### **Section 4: Changing Permissions on a Hidden File**
 
-**Command I Used:** `chmod`
+**Command Used:** `chmod`
 
-**What I Did:** I modified permissions for `.project_x.txt`, ensuring it remained secure while accessible only to authorized users.
+**What I Did:** The team archived `project_x.txt`, ensuring no one has write access while allowing the user and group to retain read access.
 
 **Example:**
-
 ```bash
 chmod 640 .project_x.txt
 ```
-
-This command allowed the user to read and write, the group to read, and others to have no access.
+This command:
+- Removed write permissions for the user (`u-w`).
+- Removed write permissions for the group (`g-w`).
+- Added read permissions for the group (`g+r`).
 
 ---
 
-### **Section 5: Modifying Directory Permissions**
+### **Section 5: Changing Directory Permissions**
 
-**Command I Used:** `chmod`
+**Command Used:** `chmod`
 
-**What I Did:** I restricted directory access to authorized users.
+**What I Did:** Restricted directory access to authorized users.
 
-**Examples:**
-1. To allow only the owner to access the directory:
-   ```bash
-   chmod 700 drafts
-   ```
-2. To allow group members to enter and modify the directory:
-   ```bash
-   chmod 770 research_folder
-   ```
+#### **Example 1:**
+To allow only the owner to access the directory:
+```bash
+chmod 700 drafts
+```
+
+#### **Example 2:**
+To ensure only the `researcher2` user has execute permissions:
+```bash
+chmod 700 drafts
+```
+The output confirmed the directory permissions aligned with the organization’s requirements.
 
 ---
 
@@ -96,22 +106,26 @@ This command allowed the user to read and write, the group to read, and others t
 To present my work, I followed best practices for including Linux commands:
 
 #### **Screenshots:**
-- I captured screenshots of commands as entered in the Bash shell.
-- I excluded any lab instructions visible on the screen.
+- Captured commands entered in the Bash shell.
+- Excluded visible lab instructions.
 
 #### **Typed Commands:**
-- I highlighted typed commands in gray.
-- I used a monospaced font for readability, as shown below:
-  ```bash
+Highlighted commands in gray and used a monospaced font for readability.
 
+Example:
+```bash
+grep OS updates.txt
+```
 
+---
 
+### **Section 7: Summary**
 
+**What I Accomplished:** I changed multiple permissions to match the level of authorization my organization wanted for files and directories in the `projects` directory. The steps included:
+- Checking permissions using `ls -la`.
+- Modifying file and directory permissions with `chmod`.
 
+These actions ensured secure and appropriate access control, safeguarding the system effectively.
 
-
-## Section 7: Summary
-
-**Accomplishments:**  
-In this project, I demonstrated my ability to manage file and directory permissions in Linux. I checked permissions, interpreted their meanings, and applied modifications using commands like `chmod` and `ls -la`. By ensuring permissions aligned with organizational requirements, I restricted access to sensitive files and directories, showcasing my capability to enforce secure access controls effectively.
+---
 
